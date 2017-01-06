@@ -1,7 +1,10 @@
 package main
 
-import "./dna"
+import (
+	"./dna"
+	"fmt"
+)
 
 func main() {
-	dna.CreateDNA()
+	fmt.Println(dna.CreateRandDNA(4))
 }
