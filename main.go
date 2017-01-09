@@ -7,4 +7,7 @@ import (
 
 func main() {
 	fmt.Println(dna.CreateRandDNA(4).Crossover(dna.CreateRandDNA(4)))
+	d := dna.CreateRandDNA(4)
+	d.Mutate()
+	fmt.Println(d)
 }

@@ -75,7 +75,7 @@ func (self *DNA) Mutate() {
 	r := rand.New(s)
 	for i := 0; i < self.Length(); i++ {
 		if r.Float64() < MUTATION_RATE {
-			this.genes[i] = r.Float64
+			self.genes[i] = r.Float64()
 		}
 	}
 }
