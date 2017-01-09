@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println(dna.CreateRandDNA(4))
+	fmt.Println(dna.CreateRandDNA(4).Crossover(dna.CreateRandDNA(4)))
 }
