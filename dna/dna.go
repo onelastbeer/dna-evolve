@@ -1,16 +1,16 @@
 package dna
 
 import (
+	"fmt"
 	"math/rand"
 	"time"
-	"fmt"
 )
 
 const MUTATION_RATE = 0.01
 
 // The structure for DNA, which is a list of genes
 type DNA struct {
-	genes        []float64
+	genes []float64
 }
 
 // Create a DNA sequence with a given list of genes
@@ -21,7 +21,7 @@ func CreateDNA(genes []float64) *DNA {
 			g[i] = 0.
 		} else if genes[i] > 1 {
 			g[i] = 1.
-		}	else {
+		} else {
 			g[i] = genes[i]
 		}
 	}
@@ -88,7 +88,7 @@ func (self *DNA) Fitness() float64 {
 	}
 	fitness := sum / float64(self.Length())
 	if fitness > 0.7 {
-		fitness /= 1 + self.genes[0];
+		fitness /= 1 + self.genes[0]
 	}
 	return fitness
 }
