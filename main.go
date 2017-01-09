@@ -10,4 +10,5 @@ func main() {
 	d := dna.CreateRandDNA(4)
 	d.Mutate()
 	fmt.Println(d)
+	fmt.Println(d.Fitness())
 }

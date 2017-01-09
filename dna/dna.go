@@ -86,7 +86,7 @@ func (self *DNA) Fitness() float64 {
 	for i := 0; i < self.Length(); i++ {
 		sum += self.genes[i]
 	}
-	fitness = sum / self.Length()
+	fitness := sum / float64(self.Length())
 	if fitness > 0.7 {
 		fitness /= 1 + self.genes[0];
 	}
