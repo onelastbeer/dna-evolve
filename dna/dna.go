@@ -40,9 +40,33 @@ func CreateRandDNA(n int) *DNA {
 	return &DNA{g}
 }
 
-// TODO create a crossover strand
+// Create a crossover strand
 func (self *DNA) Crossover(partner *DNA) *DNA {
-	return self
+	l := self.Length()
+	g := make([]float64, l)
+	partnerLength := partner.Length()
+	mid := l / 2
+	s := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(s)
+	rand := r.Float64()
+
+	for i := 0; i < l; i++ {
+		if rand < 0.5 {
+			if i < mid && i < partnerLength {
+				g[i] = partner.genes[i]
+			} else {
+				g[i] = self.genes[i]
+			}
+		} else {
+			if i < mid || i >= partnerLength {
+				g[i] = self.genes[i]
+			} else {
+				g[i] = partner.genes[i]
+			}
+		}
+	}
+
+	return CreateDNA(g)
 }
 
 // TODO mutate a strand
