@@ -80,9 +80,17 @@ func (self *DNA) Mutate() {
 	}
 }
 
-// TODO calculate the fitness of the DNA
+// Calculate the fitness of the DNA
 func (self *DNA) Fitness() float64 {
-	return 0.
+	sum := 0.
+	for i := 0; i < self.Length(); i++ {
+		sum += self.genes[i]
+	}
+	fitness = sum / self.Length()
+	if fitness > 0.7 {
+		fitness /= 1 + self.genes[0];
+	}
+	return fitness
 }
 
 // Get number of genes
