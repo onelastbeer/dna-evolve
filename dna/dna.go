@@ -69,9 +69,15 @@ func (self *DNA) Crossover(partner *DNA) *DNA {
 	return CreateDNA(g)
 }
 
-// TODO mutate a strand
-func (self *DNA) Mutate() *DNA {
-	return self
+// Mutate a strand
+func (self *DNA) Mutate() {
+	s := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(s)
+	for i := 0; i < self.Length(); i++ {
+		if r.Float64() < MUTATION_RATE {
+			this.genes[i] = r.Float64
+		}
+	}
 }
 
 // TODO calculate the fitness of the DNA
