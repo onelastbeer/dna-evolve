@@ -11,6 +11,7 @@ const MUTATION_RATE = 0.01
 // The structure for DNA, which is a list of genes
 type DNA struct {
 	genes []float64
+	mutationRate float64
 }
 
 // Create a DNA sequence with a given list of genes
@@ -26,7 +27,7 @@ func CreateDNA(genes []float64) *DNA {
 		}
 	}
 
-	return &DNA{g}
+	return &DNA{g, MUTATION_RATE}
 }
 
 // Create a DNA seqence of length n, chosen randomly
@@ -37,7 +38,14 @@ func CreateRandDNA(n int) *DNA {
 	for i := 0; i < n; i++ {
 		g[i] = r.Float64()
 	}
-	return &DNA{g}
+	return &DNA{g, MUTATION_RATE}
+}
+
+// Change the mutation rate of the dna sequence
+func (self *DNA) MutationRate(m float64) {
+	if m >= 0 && m <= 1 {
+		self.mutationRate = m
+	}
 }
 
 // Create a crossover strand
@@ -74,7 +82,7 @@ func (self *DNA) Mutate() {
 	s := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(s)
 	for i := 0; i < self.Length(); i++ {
-		if r.Float64() < MUTATION_RATE {
+		if r.Float64() < self.mutationRate {
 			self.genes[i] = r.Float64()
 		}
 	}

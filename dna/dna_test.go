@@ -43,7 +43,7 @@ func TestString(t *testing.T) {
 func TestRandDNA(t *testing.T) {
   d := CreateRandDNA(4)
   if d.Length() != 4 {
-    t.Error("Length() method on random DNA returned", d.Length(); "instead of", 4)
+    t.Error("Length() method on random DNA returned", d.Length(), "instead of", 4)
   }
   for i := 0; i < d.Length(); i++ {
     if d.genes[i] < 0 || d.genes[i] >= 1 {
@@ -77,10 +77,21 @@ func TestCrossover(t *testing.T) {
     t.Error("Crossover 3 has Length()", c1.Length(), "instead of", 2)
   }
 
-  if c3.String() != "[0.23, 0.33]" && c1.String() != "[0.34, 0.74]" {
+  if c3.String() != "[0.23, 0.33]" && c3.String() != "[0.34, 0.74]" {
     t.Error("Crossover 3 has result ", c1.String())
   }
 
 }
 
-func TestMutate(t *testing.T) {}
+func TestMutate(t *testing.T) {
+  mutatedDna1.MutationRate(1.)
+  mutatedDna1.Mutate()
+  if mutatedDna1.String() == dna1.String() {
+    t.Error("Mutated DNA 1 (rate=1) is the same as not mutated")
+  }
+  mutatedDna2.MutationRate(0.)
+  mutatedDna2.Mutate()
+  if mutatedDna2.String() != dna1.String() {
+    t.Error("Mutated DNA 2 (rate=0) is not the same as not mutated")
+  }
+}
